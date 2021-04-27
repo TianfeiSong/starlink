@@ -23,7 +23,7 @@ class WorldMap extends Component {
         this.color = d3Scale.scaleOrdinal(schemeCategory10);
         this.state = {
             isLoading: false,
-            iaDrawing: false
+            isDrawing: false
         }
     }
     componentDidMount() {
@@ -55,12 +55,10 @@ class WorldMap extends Component {
             });
             // console.log('urls->',urls)
             // step2: fetch sats positions
-            axios.all(urls).then(
-                axios.spread((...args) => {
-                    return args.map(item => item.data);
-                })
-            ).then(response => {
-                console.log('response => ', response);
+
+            Promise.all(urls).then(res => {
+                console.log('res->',res)
+                const arr = res.map(sat => sat.data);
                 this.setState({
                     isLoading: false,
                     isDrawing: true,
@@ -70,7 +68,7 @@ class WorldMap extends Component {
                 //case2: isDrawing false -> track
                 if (!prevState.isDrawing) {
                     // drawing position
-                    this.track(response);
+                    this.track(arr);
                 } else {
                     const oHint = document.getElementsByClassName("hint")[0];
                     oHint.innerHTML = "Please wait for these satellite animation to finish before selection new ones!";
