@@ -113,4 +113,3 @@ class SatelliteList extends Component {
 }
 
 export default SatelliteList;
-
