@@ -8,6 +8,24 @@ class SatelliteList extends Component {
     }
     render() {
         const satList = this.props.satInfo ? this.props.satInfo.above : [];
+        const complementList = [...satList];
+        complementList.forEach(ele => {
+            ele.checked = false;
+        });
+
+        this.state.selected.forEach(ele => {
+            const l = complementList.length;
+            for (let i = 0; i < l; i++) {
+                if (ele.satid === complementList[i].satid) {
+                    ele.checked = true;
+                    break;
+                }
+                if (i === l - 1) {
+                    complementList.unshift(ele);
+                }
+            }
+        });
+
         const { isLoading } = this.props;
         return (
             <div className="sat-list-box">
@@ -30,10 +48,10 @@ class SatelliteList extends Component {
                         :
                         <List itemLayout="horizontal"
                               className="sat-list"
-                              dataSource={satList}
+                              dataSource={complementList}
                               renderItem={ item =>
                                   <List.Item
-                                      actions={[<Checkbox dataInfo={item} onChange={this.onChange}/>]}>
+                                      actions={[<Checkbox dataInfo={item} checked={item.checked} onChange={this.onChange}/>]}>
                                       <List.Item.Meta
                                           avatar={<Avatar
                                               size={48}
@@ -81,10 +99,12 @@ class SatelliteList extends Component {
         const found = list.some( entry => entry.satid === item.satid );
 
         if (status && !found) {
+            item.checked = true;
             list = [...list, item];
             // list.push(item);
         }
         if (!status && found) {
+            item.checked = false;
             list = list.filter( entry => entry.satid !== item.satid)
         }
 
@@ -93,3 +113,4 @@ class SatelliteList extends Component {
 }
 
 export default SatelliteList;
+
