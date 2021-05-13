@@ -57,7 +57,7 @@ class WorldMap extends Component {
             // step2: fetch sats positions
 
             Promise.all(urls).then(res => {
-                console.log('res->',res)
+                // console.log('res->',res)
                 const arr = res.map(sat => sat.data);
                 this.setState({
                     isLoading: false,
