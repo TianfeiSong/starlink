@@ -37,7 +37,7 @@ class WorldMap extends Component {
         });
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.satData !== this.props.satData) {
+        if (prevProps.satData !== this.props.satData && this.props.satData.length !== 0) {
             const {
                 latitude,
                 longitude,
@@ -61,12 +61,14 @@ class WorldMap extends Component {
                 const arr = res.map(sat => sat.data);
                 this.setState({
                     isLoading: false,
-                    isDrawing: true,
                 });
 
                 //case1: isDrawing true -> cannot track
                 //case2: isDrawing false -> track
-                if (!prevState.isDrawing) {
+                if (!this.state.isDrawing) {
+                    this.setState({
+                        isDrawing: true,
+                    });
                     // drawing position
                     this.track(arr);
                 } else {

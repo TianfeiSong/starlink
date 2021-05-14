@@ -30,13 +30,23 @@ class SatelliteList extends Component {
         return (
             <div className="sat-list-box">
                 <div className="btn-container">
-                    <Button className="sat-list-btn"
-                            type="primary"
-                            onClick={this.onShowSatOnMap}
-                    >
-                        Track on the map
-                    </Button>
-
+                    {
+                        this.state.selected.length !== 0
+                            ?
+                            <Button className="sat-list-btn"
+                                    type="primary"
+                                    onClick={this.onShowSatOnMap}
+                            >
+                                Track on the map
+                            </Button>
+                            :
+                            <Button className="sat-list-btn"
+                                    type="primary"
+                                    disabled
+                            >
+                                Track on the map
+                            </Button>
+                    }
                 </div>
                 <hr/>
                 {
