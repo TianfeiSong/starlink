@@ -17,7 +17,7 @@ class SatelliteList extends Component {
             const l = complementList.length;
             for (let i = 0; i < l; i++) {
                 if (ele.satid === complementList[i].satid) {
-                    ele.checked = true;
+                    complementList[i].checked = true;
                     break;
                 }
                 if (i === l - 1) {
