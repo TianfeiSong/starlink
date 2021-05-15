@@ -23,20 +23,6 @@ class SatSettingForm extends Component {
                   onSubmit={this.onShowSatellite}
                   className="sat-setting"
             >
-                <Form.Item label="Longitude(degrees)">
-                    {getFieldDecorator('longitude', {
-                        rules: [
-                            {
-                                required: true,
-                                message: 'Please input your Longitude.',
-                            },
-                        ],
-                    })(<InputNumber min={-180}
-                                    max={180}
-                                    placeholder="Please input Longitude"
-                                    style={{width: "100%"}}
-                    />)}
-                </Form.Item>
                 <Form.Item label="Latitude(degrees)">
                     {getFieldDecorator('latitude', {
                         rules: [
@@ -48,6 +34,20 @@ class SatSettingForm extends Component {
                     })(<InputNumber min={-90}
                                     max={90}
                                     placeholder="Please input Latitude"
+                                    style={{width: "100%"}}
+                    />)}
+                </Form.Item>
+                <Form.Item label="Longitude(degrees)">
+                    {getFieldDecorator('longitude', {
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Please input your Longitude.',
+                            },
+                        ],
+                    })(<InputNumber min={-180}
+                                    max={180}
+                                    placeholder="Please input Longitude"
                                     style={{width: "100%"}}
                     />)}
                 </Form.Item>
